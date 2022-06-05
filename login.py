@@ -2,6 +2,8 @@ import sqlite3
 import questionary
 
 
+# todo: write comments
+
 def get_password(username):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
@@ -9,6 +11,15 @@ def get_password(username):
     user_password = cursor.fetchone()
     database.close()
     return user_password[0]
+
+
+def get_user_id(username):
+    database = sqlite3.connect('./database.db')
+    cursor = database.cursor()
+    cursor.execute("""SELECT id from users WHERE firstname=?""", [username])
+    user_id = cursor.fetchone()
+    database.close()
+    return user_id[0]
 
 
 def get_firstname(username):
@@ -23,6 +34,9 @@ def get_firstname(username):
 def login():
     print("Welcome back!")
     print("Please type your credentials: ")
+
+    # todo: adjust the validation
+
     username = questionary.text("username: ",
                                 validate=lambda text: True if text.isalpha() and len(
                                     text) > 3 else "Input not valid").ask()
@@ -36,11 +50,15 @@ def login():
 
     firstname = get_firstname(username)
     print("Welcome back, " + firstname)
+    return firstname
 
 
 def register_user():
     print("Welcome!")
     print("Please provide credentials to proceed.")
+
+    # todo: adjust the validation
+
     username = questionary.text("Please choose an username",
                                 validate=lambda text: True if text.isalpha() and len(text) > 3
                                 else "Username not valid").ask()
@@ -62,6 +80,7 @@ def register_user():
     else:
         print("Sorry there's a problem. Try again please.")
     database.close()
+    return firstname
 
 
 def welcome():
@@ -72,6 +91,8 @@ def welcome():
     ]).ask()
 
     if action == "Login":
-        login()
+        username = login()
     else:
-        register_user()
+        username = register_user()
+
+    return username

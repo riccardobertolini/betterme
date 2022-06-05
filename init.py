@@ -7,22 +7,24 @@ def database_setup():
 
     print('Database check...')
     cursor.execute("""CREATE TABLE IF NOT EXISTS users (
-    id int PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     username text,
     firstname text,
     password text
     )""")
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS progresses (
-    id int PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     taskId text,
-    completed int,
-    eventDate string
+    user int,
+    date TIMESTAMP
     )""")
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS tasks (
-    id int PRIMARY KEY AUTOINCREMENT,
-    taskName text,
+    id INTEGER PRIMARY KEY,
+    name text,
+    user text,
+    date TIMESTAMP,
     periodicity text
     )""")
 

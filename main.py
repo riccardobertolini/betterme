@@ -1,14 +1,41 @@
 # This is a sample Python script.
 
 # Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import questionary
+
+from analytics import analytics_main
 from init import database_setup
 from login import welcome
+from tasks import tasks_main
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     database_setup()
-    welcome()
+    username = welcome()
+    exit_request = 0
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    while exit_request == 0:
+        action = questionary.select("Please select an action", choices=[
+            "Tasks",
+            "Analytics",
+            "Settings",
+            "Logout and Exit"
+        ]).ask()
+
+        if action == "Tasks":
+            tasks_main(username)
+            exit_request = 0
+
+        if action == "Analytics":
+            analytics_main(username)
+            exit_request = 0
+
+        if action == "Settings":
+            exit_request = 0
+
+        if action == "Logout and Exit":
+            exit_request = 1
+
+    print("Goodbye :)")
+
+
