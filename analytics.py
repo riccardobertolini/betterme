@@ -29,6 +29,22 @@ def analytics_main(username):
                 task_name = cursor.fetchone()
                 print(task_name[0])
 
+                database.close()
+
+        if analytics_action == 'Show longest steak for a task':
+            questionary.text("")
+
+        if analytics_action == 'Show longest steak ever':
+            database = sqlite3.connect('./database.db')
+            cursor = database.cursor()
+            cursor.execute("""SELECT taskId, count(*) from progresses GROUP BY taskId ORDER BY count(*) DESC""")
+            highest_steak_entry = cursor.fetchone()
+
+            if highest_steak_entry:
+                cursor.execute("""SELECT name from tasks WHERE id = ?""", [highest_steak_entry[0]])
+                highest_steak = cursor.fetchone()
+
+            print('The highest steak ever is with this task: ' + highest_steak[0] + ' completed ' + str(highest_steak_entry[1]) + ' times!')
             database.close()
 
         if analytics_action == '< Back to Main Menu':
