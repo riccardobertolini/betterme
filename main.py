@@ -1,12 +1,10 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
 import questionary
 
 from analytics import analytics_main
 from init import database_setup
 from login import welcome
-from tasks import tasks_main
+from tasks import TaskManager
 
 
 if __name__ == '__main__':
@@ -22,8 +20,9 @@ if __name__ == '__main__':
             "Logout and Exit"
         ]).ask()
 
+        tskmngr = TaskManager(username)
         if action == "Tasks":
-            tasks_main(username)
+            tskmngr.main()
             exit_request = 0
 
         if action == "Analytics":

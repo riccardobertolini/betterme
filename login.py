@@ -1,8 +1,19 @@
 import sqlite3
 import questionary
+from typing import Callable
 
 
 # todo: write comments
+
+def validate(error_message: str) -> Callable:
+    """
+    Returns a function that checks if the input is both string and has a length greater than 3. If not, it prints the error message.
+
+    :param error_message:
+    :rtype Callable:
+    """
+    return lambda text: True if text.isalpha() and len(text) > 3 else error_message
+
 
 def get_password(username):
     database = sqlite3.connect('./database.db')
@@ -37,15 +48,18 @@ def login():
 
     # todo: adjust the validation
 
-    username = questionary.text("username: ",
-                                validate=lambda text: True if text.isalpha() and len(
-                                    text) > 3 else "Input not valid").ask()
+    username = questionary.text(
+        "username: ",
+        validate=validate("Input not valid")
+        ).ask()
     password = ''
     user_credential = 'true'
 
     while password != user_credential:
-        password = questionary.password("password: ",
-                                        validate=lambda text: True if len(text) > 3 else "Please try again").ask()
+        password = questionary.password(
+            "password: ",
+            validate=lambda text: True if len(text) > 3 else "Please try again"
+            ).ask()
         user_credential = get_password(username)
 
     firstname = get_firstname(username)
@@ -59,15 +73,19 @@ def register_user():
 
     # todo: adjust the validation
 
-    username = questionary.text("Please choose an username",
-                                validate=lambda text: True if text.isalpha() and len(text) > 3
-                                else "Username not valid").ask()
-    password = questionary.text("Please choose a password",
-                                validate=lambda text: True if len(text) > 3
-                                else "Password not valid").ask()
-    firstname = questionary.text("Please choose a firstname",
-                                 validate=lambda text: True if text.isalpha() and len(text) > 3
-                                 else "Firstname not valid").ask()
+    username = questionary.text(
+        "Please choose an username",
+        validate=validate("Username not valid")
+        ).ask()
+    password = questionary.text(
+        "Please choose a password",
+        validate=lambda text: True if len(text) > 3
+        else "Password not valid"
+        ).ask()
+    firstname = questionary.text(
+        "Please choose a firstname",
+        validate=validate("Firstname not valid")
+        ).ask()
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
 
@@ -85,10 +103,12 @@ def register_user():
 
 def welcome():
     print("---WELCOME!---")
-    action = questionary.select("Please select an user action", choices=[
-        "Login",
-        "Create new user"
-    ]).ask()
+    action = questionary.select(
+        "Please select an user action", choices=[
+            "Login",
+            "Create new user"
+            ]
+        ).ask()
 
     if action == "Login":
         username = login()

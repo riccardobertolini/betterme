@@ -1,18 +1,25 @@
 import sqlite3
 import questionary
 from login import get_user_id
-from tasks import date_today
+
+from datetime import datetime
+
+
+def date_today():
+    return datetime.now().strftime("%Y%m%d")
 
 
 def analytics_main(username):
     exit_analytics_request = 0
     while exit_analytics_request == 0:
-        analytics_action = questionary.select("Select an option: ", choices=[
-            "Show completed task today",
-            "Show longest steak for a task",
-            "Show longest steak ever",
-            "< Back to Main Menu"
-        ]).ask()
+        analytics_action = questionary.select(
+            "Select an option: ", choices=[
+                "Show completed task today",
+                "Show longest steak for a task",
+                "Show longest steak ever",
+                "< Back to Main Menu"
+                ]
+            ).ask()
 
         if analytics_action == 'Show completed task today':
             database = sqlite3.connect('./database.db')
@@ -29,7 +36,7 @@ def analytics_main(username):
                 task_name = cursor.fetchone()
                 print(task_name[0])
 
-                database.close()
+            database.close()
 
         if analytics_action == 'Show longest steak for a task':
             questionary.text("")
@@ -44,7 +51,11 @@ def analytics_main(username):
                 cursor.execute("""SELECT name from tasks WHERE id = ?""", [highest_steak_entry[0]])
                 highest_steak = cursor.fetchone()
 
-            print('The highest steak ever is with this task: ' + highest_steak[0] + ' completed ' + str(highest_steak_entry[1]) + ' times!')
+            print(
+                'The highest steak ever is with this task: ' + highest_steak[0] + ' completed ' + str(
+                    highest_steak_entry[1]
+                    ) + ' times!'
+                )
             database.close()
 
         if analytics_action == '< Back to Main Menu':
