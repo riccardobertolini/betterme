@@ -8,7 +8,7 @@ from datetime import datetime
 Setting page functions. Taking care mainly of updating user's password, could be extended in future
 '''
 
-def settings_main(username: string):
+def settings_main(username: str):
     exit_analytics_request = 0
     while exit_analytics_request == 0:
         analytics_action = questionary.select(

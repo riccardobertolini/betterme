@@ -64,7 +64,7 @@ and follow the instruction on screen.
 
 
 ## Usage
-As first step, please create an user. On the current repository is provided an example DB with an user (username: user1, password: test) and some tasks already completed for demo purposes. You can erase the database in case you don't want to use the demo data and the app will take care to create the tables that are needed. 
+As first step, please create an user. On the current repository is provided an example DB with an user (username: mary, password: test) and some tasks already completed for demo purposes. You can erase the database in case you don't want to use the demo data and the app will take care to create the tables that are needed. 
 Main menu functionalities (matching their file naming):
 * Tasks
 * Analytics

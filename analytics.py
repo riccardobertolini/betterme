@@ -28,9 +28,8 @@ def analytics_main(username):
             database = sqlite3.connect('./database.db')
             cursor = database.cursor()
 
-            userId = get_user_id(username)
             today = date_today()
-            cursor.execute("""SELECT * from progresses WHERE date >= ? AND user=?""", [today, userId])
+            cursor.execute("""SELECT * from progresses WHERE date >= ? AND user=?""", [today, username])
             tasks_list = cursor.fetchall()
 
             print("Tasks completed today:")

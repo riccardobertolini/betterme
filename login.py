@@ -15,7 +15,7 @@ def validate(error_message: str) -> Callable:
     return lambda text: True if text.isalpha() and len(text) > 3 else error_message
 
 
-def get_password(username: string):
+def get_password(username: str):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
     cursor.execute("""SELECT password from users WHERE username=?""", [username])
@@ -24,7 +24,7 @@ def get_password(username: string):
     return user_password[0]
 
 
-def get_user_id(username: string):
+def get_user_id(username: str):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
     cursor.execute("""SELECT id from users WHERE firstname=?""", [username])
@@ -33,7 +33,7 @@ def get_user_id(username: string):
     return user_id[0]
 
 
-def get_firstname(username: string):
+def get_firstname(username: str):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
     cursor.execute("""SELECT firstname from users WHERE username=?""", [username])
@@ -42,7 +42,7 @@ def get_firstname(username: string):
     return user_firstname[0]
 
 
-def update_password(username: string, password: string):
+def update_password(username: str, password: str):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
     cursor.execute("""UPDATE users SET password=? WHERE firstname=?""", [password, username])
