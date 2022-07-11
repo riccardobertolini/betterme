@@ -5,6 +5,7 @@ from analytics import analytics_main
 from init import database_setup
 from login import welcome
 from tasks import TaskManager
+from settings import settings_main
 
 
 if __name__ == '__main__':
@@ -30,6 +31,7 @@ if __name__ == '__main__':
             exit_request = 0
 
         if action == "Settings":
+            settings_main(username)
             exit_request = 0
 
         if action == "Logout and Exit":

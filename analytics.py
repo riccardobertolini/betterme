@@ -39,7 +39,16 @@ def analytics_main(username):
             database.close()
 
         if analytics_action == 'Show longest steak for a task':
-            questionary.text("")
+            requested_task = questionary.text("Please write the task you want to query").ask()
+            database = sqlite3.connect('./database.db')
+            cursor = database.cursor()
+            cursor.execute("""SELECT id from tasks WHERE name = ?""", [requested_task])
+            task_id = cursor.fetchone()
+            cursor.execute("""SELECT * from progresses WHERE taskId=?""", [task_id[0]])
+            tasks_list = cursor.fetchall()
+            print("highest streak for the task " + requested_task + " is " + str(len(tasks_list)))
+            database.close()
+
 
         if analytics_action == 'Show longest steak ever':
             database = sqlite3.connect('./database.db')

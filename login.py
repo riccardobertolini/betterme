@@ -42,6 +42,15 @@ def get_firstname(username):
     return user_firstname[0]
 
 
+def update_password(username, password):
+    database = sqlite3.connect('./database.db')
+    cursor = database.cursor()
+    cursor.execute("""UPDATE users SET password=? WHERE firstname=?""", [password, username])
+    affected_rows = cursor.rowcount
+    database.close()
+    return affected_rows > 0
+
+
 def login():
     print("Welcome back!")
     print("Please type your credentials: ")
@@ -102,7 +111,7 @@ def register_user():
 
 
 def welcome():
-    print("---WELCOME!---")
+    print("---WELCOME to BetterMe!---")
     action = questionary.select(
         "Please select an user action", choices=[
             "Login",
