@@ -4,6 +4,9 @@ from login import get_user_id
 
 from datetime import datetime
 
+'''
+Analytics page functions. Mainly returning print events and reading database for queries.
+'''
 
 def date_today():
     return datetime.now().strftime("%Y%m%d")

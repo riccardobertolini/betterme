@@ -1,27 +1,44 @@
-# betterme
-Python required to run this project, please download the last version (3.10+) 
-from the official website: https://www.python.org/downloads/  
+# BetteMe
+
+BetterMe is an app that want to improve users life, while they develop good habits repeating healthy tasks.
+The app is written in Python, using questionary to help the navigation throught the menu. It's currently supporting multi users and saving the data on a local SQL Database, in order to improve performance, usability and portability.
+The app is written using Object Oriented pattern and functional programming, reusing the functions as much as possible. Also, there is real case scenario test for the Tasks main file.
+
+The users can:
+* create their own profile
+* create new tasks, assigning a periodicity (day, week, month)
+* record their progress daily
+* analyse their progresses, in particular:
+  * longest streak ever on a specific task
+  * task with the longest streak ever
+  * tasks completed this specific day
+* updating their password
+
+
+## Prerequisites
+Before you continue, ensure you have met the following requirements:
+* You have installed the latest version of Python (3.9+).
+* You are using a machine that allow the usage of SQL-lite with full permission to write on database
+
 ## Install
+Run before you go the pip command in order to install dependencies with:
 ```
 pip install -r requirements.txt
 ```
 
-on Linux (Debian) run:
-
-```
-sudo apt install python3-pytest
-```
 
 ## Start
 
-Run on terminal
+Once the dependencies are satisfied, unzip the folder and navigate into it using the `cd` command. Then, run on terminal, 
 ```
 python main.py
 ```
 and follow the instruction on screen.
+BetterMe will run a quick check on the database, and if it's empty, it will create the main tables. 
+On the current repository is provided an example DB with an user (username: user1, password: test) however it's possible to create your own user from the first main title.
 
 ## Tests
-
+The tests are using `pytest`. This software can detect automatically where the tests are following the convention `***__test.py`. The current file tested is Tasks, so to see if there's passing please run:
 Run on terminal
 ```
 pytest .

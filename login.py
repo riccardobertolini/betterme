@@ -15,7 +15,7 @@ def validate(error_message: str) -> Callable:
     return lambda text: True if text.isalpha() and len(text) > 3 else error_message
 
 
-def get_password(username):
+def get_password(username: string):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
     cursor.execute("""SELECT password from users WHERE username=?""", [username])
@@ -24,7 +24,7 @@ def get_password(username):
     return user_password[0]
 
 
-def get_user_id(username):
+def get_user_id(username: string):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
     cursor.execute("""SELECT id from users WHERE firstname=?""", [username])
@@ -33,7 +33,7 @@ def get_user_id(username):
     return user_id[0]
 
 
-def get_firstname(username):
+def get_firstname(username: string):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
     cursor.execute("""SELECT firstname from users WHERE username=?""", [username])
@@ -42,7 +42,7 @@ def get_firstname(username):
     return user_firstname[0]
 
 
-def update_password(username, password):
+def update_password(username: string, password: string):
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
     cursor.execute("""UPDATE users SET password=? WHERE firstname=?""", [password, username])
@@ -54,8 +54,6 @@ def update_password(username, password):
 def login():
     print("Welcome back!")
     print("Please type your credentials: ")
-
-    # todo: adjust the validation
 
     username = questionary.text(
         "username: ",
@@ -80,8 +78,6 @@ def register_user():
     print("Welcome!")
     print("Please provide credentials to proceed.")
 
-    # todo: adjust the validation
-
     username = questionary.text(
         "Please choose an username",
         validate=validate("Username not valid")
@@ -98,7 +94,6 @@ def register_user():
     database = sqlite3.connect('./database.db')
     cursor = database.cursor()
 
-    # todo: test if there's already this user
     userdata = [str(username), str(firstname), str(password)]
     cursor.execute("""INSERT INTO users(username, firstname, password) VALUES (?,?,?)""", userdata)
     database.commit()
