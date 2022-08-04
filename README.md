@@ -73,5 +73,5 @@ Main menu functionalities (matching their file naming):
  
 
 ## Contribution
-This project was designed as assignment, and it's my first python project. Any suggestions and pull requests are welcome.    
+Any suggestions and pull requests are welcome.    
 
