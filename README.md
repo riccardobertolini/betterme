@@ -1,4 +1,6 @@
 # BetteMe
+Python habit tracker - backend CLI interface with SQL database
+
 
 ## Table of Contents
 1. [General Information](#General-Information)
