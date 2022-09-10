@@ -1,5 +1,5 @@
 # BetteMe
-Python 3 habit tracker - backend CLI interface with SQL database
+Python 3 habit tracker - backend CLI interface with SQL local database.
 
 
 ## Table of Contents
